@@ -4,24 +4,25 @@ const {REST} = require("@discordjs/rest")
 const {Routes} = require("discord-api-types/v9")
 const fs = require("fs")
 const {Player} = require("discord-player")
+const { GatewayIntentBits } = require("discord.js")
 
 
 dotenv.config()
 const TOKEN = process.env.TOKEN
 
 const LOAD_SLASH = process.argv[2] == "load"
-const clientId = "1035963116162404413"
-const guildId = "235517913044484099"
+const CLIENT_ID = "1035963116162404413"
+const GUILD_ID = "235517913044484099"
 
 const client = new Discord.Client({
     intents: [
-        "GUILDS",
-        "GUILD_VOICE_STATES"
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates
     ]
 })
 
 client.slashcommands = new Discord.Collection()
-client.playoer = new Player(client, 
+client.player = new Player(client, 
     {
         ytdlOptions: {
             quality: "highestaudio",
